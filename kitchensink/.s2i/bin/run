@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # This is a 'deploy' action hook script. This script must be executable
 # and will be run by the S2I process just before the original S2I 'run'
@@ -15,3 +15,4 @@ env
 
 
 ./bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=DEBUG)
+exec $JBOSS_HOME/bin/openshift-launch.sh
