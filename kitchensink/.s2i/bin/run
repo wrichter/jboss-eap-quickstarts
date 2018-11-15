@@ -6,7 +6,7 @@ set -eo pipefail
 echo " -----> Environment variables set for the deployed application."
 env
 
-if [ -z "${LOG_LEVEL}" ]; then
+if [ -v LOG_LEVEL ]; then
 #    $JBOSS_HOME/bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=${LOG_LEVEL})"
      sed -i "s/<level name=\"INFO\"\/>/<level name=\"${LOG_LEVEL}\"\/>/g" /opt/eap/standalone/configuration/standalone.xml
 fi
