@@ -1,0 +1,1 @@
+./bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=DEBUG)
