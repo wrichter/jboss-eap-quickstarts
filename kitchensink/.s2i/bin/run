@@ -14,5 +14,5 @@ echo " -----> Environment variables set for the deployed application."
 env
 
 
-./bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=DEBUG)
+./bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=DEBUG)"
 exec $JBOSS_HOME/bin/openshift-launch.sh
