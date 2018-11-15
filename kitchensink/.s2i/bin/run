@@ -7,7 +7,7 @@ echo " -----> Environment variables set for the deployed application."
 env
 
 if [ -v LOG_LEVEL ]; then
-#    $JBOSS_HOME/bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=${LOG_LEVEL})"
-     sed -i "s/<level name=\"INFO\"\/>/<level name=\"${LOG_LEVEL}\"\/>/g" /opt/eap/standalone/configuration/standalone.xml
+    $JBOSS_HOME/bin/jboss-cli.sh -c --commands="embed-server --std-out=echo,/subsystem=logging/root-logger=ROOT:change-root-log-level(level=${LOG_LEVEL}),stop-embedded-server"
+#     sed -i "s/<level name=\"INFO\"\/>/<level name=\"${LOG_LEVEL}\"\/>/g" /opt/eap/standalone/configuration/standalone.xml
 fi
 exec $JBOSS_HOME/bin/openshift-launch.sh
