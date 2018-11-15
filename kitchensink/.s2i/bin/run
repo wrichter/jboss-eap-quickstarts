@@ -1,11 +1,4 @@
 #!/bin/sh
-
-# This is a 'deploy' action hook script. This script must be executable
-# and will be run by the S2I process just before the original S2I 'run'
-# script is run. This script is to allow a user to run any final steps
-# just before the application is to be started. This can include running
-# background tasks.
-
 set -eo pipefail
 
 # Dump out the set of environment variables which were used by the build.
@@ -13,6 +6,7 @@ set -eo pipefail
 echo " -----> Environment variables set for the deployed application."
 env
 
-
-./bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=DEBUG)"
+if [ -z "${LOG_LEVEL}" ]; then
+    $JBOSS_HOME/bin/jboss-cli.sh -c --commands="/subsystem=logging/root-logger=ROOT:change-root-log-level(level=${LOG_LEVEL})"
+fi
 exec $JBOSS_HOME/bin/openshift-launch.sh
